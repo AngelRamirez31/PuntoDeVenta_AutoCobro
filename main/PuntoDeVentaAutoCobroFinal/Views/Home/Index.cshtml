@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Bienvenida";
+}
+
+<div class="text-center py-5">
+  <h1 class="display-5 fw-bold mb-3">Bienvenido al Punto de Venta de Auto‑Cobro</h1>
+  <p class="lead mb-4">Listo para comenzar tu compra.</p>
+  <a class="btn btn-primary btn-lg" asp-controller="Checkout" asp-action="Index">Iniciar Compra</a>
+
+  <div class="row mt-5 justify-content-center">
+    <div class="col-md-6">
+      <ul class="list-group list-group-flush text-start">
+        <li class="list-group-item"><a asp-controller="Admin" asp-action="Products">Admin Productos</a></li>
+        <li class="list-group-item"><a asp-controller="Admin" asp-action="SearchTicket">Buscar Ticket</a></li>
+        <li class="list-group-item"><a asp-controller="Admin" asp-action="Reports">Reportes</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
