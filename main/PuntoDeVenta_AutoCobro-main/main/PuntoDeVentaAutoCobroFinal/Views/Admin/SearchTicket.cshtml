@@ -1,0 +1,27 @@
+﻿@model PuntoDeVentaAutoCobroFinal.Models.Ticket
+
+@{
+    ViewData["Title"] = "Búsqueda de Tickets";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="SearchTicket" method="get" class="row g-3 align-items-center mb-4">
+    <div class="col-auto">
+        <label for="id" class="visually-hidden">ID del Ticket</label>
+        <input type="number" class="form-control" name="id" placeholder="Introduce el ID del Ticket...">
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+</form>
+
+@if (Model != null)
+{
+    <hr />
+    <h3>Resultado de la Búsqueda</h3>
+    @* Usamos la vista de Recibo del Checkout para mostrar los detalles del ticket *@
+    <div class="col-md-6 offset-md-3">
+        @await Html.PartialAsync("~/Views/Checkout/Receipt.cshtml", Model)
+    </div>
+}

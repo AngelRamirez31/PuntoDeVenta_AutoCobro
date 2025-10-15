@@ -1,0 +1,75 @@
+﻿@model IEnumerable<PuntoDeVentaAutoCobroFinal.Models.Product>
+
+@{
+    ViewData["Title"] = "Administración de Productos";
+    var newProduct = new Product();
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <h3>Agregar Nuevo Producto</h3>
+        <form asp-action="AddProduct" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-2">
+                <label asp-for="@newProduct.Nombre" class="control-label"></label>
+                <input asp-for="@newProduct.Nombre" class="form-control" />
+                <span asp-validation-for="@newProduct.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="@newProduct.Marca" class="control-label"></label>
+                <input asp-for="@newProduct.Marca" class="form-control" />
+                <span asp-validation-for="@newProduct.Marca" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="@newProduct.Categoria" class="control-label"></label>
+                <input asp-for="@newProduct.Categoria" class="form-control" />
+                <span asp-validation-for="@newProduct.Categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="@newProduct.Precio" class="control-label"></label>
+                <input asp-for="@newProduct.Precio" type="number" step="0.01" class="form-control" />
+                <span asp-validation-for="@newProduct.Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="@newProduct.CodigoDeBarras" class="control-label"></label>
+                <input asp-for="@newProduct.CodigoDeBarras" type="number" class="form-control" />
+                <span asp-validation-for="@newProduct.CodigoDeBarras" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Agregar Producto" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <h3>Catálogo Actual</h3>
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                    <th>@Html.DisplayNameFor(model => model.Precio)</th>
+                    <th>@Html.DisplayNameFor(model => model.CodigoDeBarras)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.Precio.ToString("C")</td>
+                        <td>@item.CodigoDeBarras</td>
+                        <td>
+                            <form asp-action="DeleteProduct" asp-route-id="@item.Id" method="post" onsubmit="return confirm('¿Confirmas que deseas eliminar este producto?');">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

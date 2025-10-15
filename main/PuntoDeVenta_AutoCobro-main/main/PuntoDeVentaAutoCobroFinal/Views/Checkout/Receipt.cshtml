@@ -1,0 +1,34 @@
+﻿@model PuntoDeVentaAutoCobroFinal.Models.Ticket
+
+@{
+    ViewData["Title"] = "Recibo de Compra";
+}
+
+<div class="col-md-6 offset-md-3">
+    <div class="card">
+        <div class="card-body text-center">
+            <h3 class="card-title">Gracias por tu compra</h3>
+            <p><strong>Ticket ID:</strong> @Model.Id</p>
+            <p><strong>Fecha:</strong> @Model.Fecha.ToString("g")</p>
+            <hr />
+            <ul class="list-unstyled">
+                @foreach (var item in Model.Items)
+                {
+                    <li>
+                        @item.Cantidad x @item.Product.Nombre - @((item.Cantidad * item.PrecioUnitario).ToString("C"))
+                    </li>
+                }
+            </ul>
+            <hr />
+            <h4><strong>Total Pagado: @Model.Total.ToString("C")</strong></h4>
+            <p><strong>Método de pago:</strong> @Model.MetodoPago</p>
+            @if (Model.MetodoPago == "Efectivo")
+            {
+                <p><strong>Monto Recibido:</strong> @Model.MontoRecibido?.ToString("C")</p>
+                <p><strong>Cambio:</strong> @Model.Cambio?.ToString("C")</p>
+            }
+            <hr />
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Nueva Compra</a>
+        </div>
+    </div>
+</div>
